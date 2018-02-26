@@ -11,7 +11,7 @@ task runGds {
 	}
 
 	runtime {
-		docker: "manning-lab/vcfToGds:latest"
+		docker: "manninglab/vcftogds:latest"
 		disks: "local-disk ${disk} SSD"
 		memory: "${memory}G"
 	}
