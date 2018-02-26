@@ -12,7 +12,7 @@ task runGds {
 
 	runtime {
 		docker: "manning-lab/vcfToGds:latest"
-		disks: "local-disk ${disksize} SSD"
+		disks: "local-disk ${disk} SSD"
 		memory: "${memory}G"
 	}
 
@@ -34,6 +34,6 @@ workflow w {
 
 
 	output {
-		Array[File] = runGds.out_file
+		Array[File] gds_files = runGds.out_file
 	}
 }
