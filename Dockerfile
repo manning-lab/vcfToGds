@@ -1,4 +1,4 @@
-from r-base:3.4.3
+from robbyjo/r-mkl-bioconductor:3.4.1
 
 MAINTAINER tim majarian (tmajaria@broadinstitute.org)
 
