@@ -1,5 +1,5 @@
 {
   "w.vcf_files": ["test_inputs/ALL.autosomes.pindel.20130502.complexindex.low_coverage.genotypes.vcf"],
-  "w.this_disk": 1,
-  "w.this_memory": 1
+  "w.this_disk": 20,
+  "w.this_memory": 10
 }
