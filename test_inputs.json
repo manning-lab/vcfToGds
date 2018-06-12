@@ -1,0 +1,5 @@
+{
+  "w.vcf_files": ["test_inputs/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz"],
+  "w.this_disk": 50,
+  "w.this_memory": 10
+}
