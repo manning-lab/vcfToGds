@@ -13,7 +13,7 @@ task runGds {
 	runtime {
 		docker: "manninglab/vcftogds:latest"
 		disks: "local-disk ${disk} SSD"
-		memory: "${memory}G"
+		memory: "${memory} GB"
 	}
 
 	output {
