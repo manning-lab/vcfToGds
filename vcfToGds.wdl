@@ -33,8 +33,13 @@ workflow w {
 		}
 	}
 
-
 	output {
 		Array[File] gds_files = runGds.out_file
 	}
+
+	meta {
+        author: "Tim Majarian"
+        email: "tmajaria@broadinstitute.org"
+        description: "Convert a VCF file to a GDS file."
+    }
 }
