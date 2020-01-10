@@ -2,12 +2,10 @@ task runGds {
 	File vcf
 	Int disk
 	Float memory
-
-	String out_base = basename(vcf, ".vcf")
 	
 
 	command {
-		R --vanilla --args ${vcf} ${out_base} < /vcfToGds/vcfToGds.R
+		R --vanilla --args ${vcf} < /vcfToGds/vcfToGds.R
 	}
 
 	runtime {
@@ -18,7 +16,7 @@ task runGds {
 	}
 
 	output {
-		File out_file = "${out_base}.gds"
+		File out_file = select_first(glob("*.gds"))
 	}
 }
 
