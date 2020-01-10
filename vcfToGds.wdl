@@ -20,7 +20,7 @@ task runGds {
 	}
 }
 
-workflow w {
+workflow vcfToGds_wf {
 	Array[File] vcf_files
 	Int this_disk
 	Float this_memory
