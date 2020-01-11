@@ -8,6 +8,6 @@ args <- commandArgs(trailingOnly=T)
 vcf <- args[1]
 
 # remove extension, can be .vcf, .vcf.gz, .vcf.bgz
-gds_out <- paste0(sub(".vcf.bgz$|.vcf.gz$|.vcf$", "", vcf), ".gds")
+gds_out <- paste0(sub(".vcf.bgz$|.vcf.gz$|.vcf$", "", basename(vcf)), ".gds")
 
 seqVCF2GDS(vcf, gds_out, storage.option="LZMA_RA", verbose=TRUE)
