@@ -1,11 +1,18 @@
-task runGds {
-	File vcf
-	Int disk
-	Float memory
-	
+version 1.0
 
+task runGds {
+	input {
+		File vcf
+		Int disk
+		Float memory
+	}
+	
 	command {
-		R --vanilla --args ${vcf} < /vcfToGds/vcfToGds.R
+		set -eux -o pipefail
+
+		echo "Calling R script"
+
+		R --vanilla --args ~{vcf} < /vcfToGds/vcfToGds.R
 	}
 
 	runtime {
@@ -16,28 +23,26 @@ task runGds {
 	}
 
 	output {
-		File out_file = select_first(glob("*.gds"))
+		Array[File] out_file = glob("*.gds")
 	}
 }
 
 workflow vcfToGds_wf {
-	Array[File] vcf_files
-	Int this_disk
-	Float this_memory
-
-	scatter(this_file in vcf_files) {
-		call runGds { 
-			input: vcf = this_file, disk = this_disk, memory = this_memory
-		}
+	input {
+		Array[File] vcf_files
+		Int this_disk
+		Float this_memory
 	}
 
-	output {
-		Array[File] gds_files = runGds.out_file
+	call runGds {
+		input:
+			vcf = vcf_files,
+			disk = this_disk,
+			memory = this_memory
 	}
 
 	meta {
-        author: "Tim Majarian"
-        email: "tmajaria@broadinstitute.org"
-        description: "Convert a VCF file to a GDS file."
-    }
+		author: "Tim Majarian"
+		email: "tmajaria@broadinstitute.org"
+	}
 }
