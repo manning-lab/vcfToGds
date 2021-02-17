@@ -34,11 +34,13 @@ workflow vcfToGds_wf {
 		Float this_memory
 	}
 
-	call runGds {
-		input:
-			vcf = vcf_files,
-			disk = this_disk,
-			memory = this_memory
+	scatter(vcf_file in vcf_files) {
+		call runGds {
+			input:
+				vcf = vcf_file,
+				disk = this_disk,
+				memory = this_memory
+		}
 	}
 
 	meta {
