@@ -1,8 +1,15 @@
 FROM uwgac/topmed-master:latest
 
-MAINTAINER tim majarian (tmajaria@broadinstitute.org)
+MAINTAINER Ash O-Apostrophe-Farrell (aofarrel@ucsc.edu)
+
+# prevent apt-get dialogs
+ENV DEBIAN_FRONTEND noninteractive
+
+# become root to install packages
+# is there a better workaround?
+USER root
 
 RUN apt-get update & \
-	apt-get -y install git
+	apt-get install git
 
-RUN git clone https://github.com/manning-lab/vcfToGds.git
+RUN git clone --branch add-uniqueVariantIDs https://github.com/aofarrel/vcfToGds.git
