@@ -12,4 +12,4 @@ USER root
 RUN apt-get update & \
 	apt-get install git
 
-RUN git clone https://github.com/aofarrel/vcfToGds/tree/add-uniqueVariantIDs.git
+RUN git clone --branch add-uniqueVariantIDs https://github.com/aofarrel/vcfToGds/tree/add-uniqueVariantIDs.git
