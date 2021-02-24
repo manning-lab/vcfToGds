@@ -39,4 +39,3 @@ vignettes/*.pdf
 cromwell-input/*
 Cromwell.stdout.txt
 Cromwell.stderr.txt
-uniqueVariantIDs.R
