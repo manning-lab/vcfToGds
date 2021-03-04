@@ -1,5 +1,7 @@
 # vcfToGds - Convert vcf files to gds format
 
+# Superceeded by https://github.com/aofarrel/analysis_pipeline_WDL
+
 ## Description 
 
 This workflow converts files in Variant Call Format (VCF) to Genomic Data Structure format (GDS). It attempts to implement the first step of the [University of Washington TOPMed pipeline](https://github.com/UW-GAC/analysis_pipeline), itself a five-part process.
