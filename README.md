@@ -4,17 +4,7 @@
 
 ## Description 
 
-This workflow converts files in Variant Call Format (VCF) to Genomic Data Structure format (GDS). It attempts to implement the first step of the [University of Washington TOPMed pipeline](https://github.com/UW-GAC/analysis_pipeline), itself a five-part process.
-
-### Authors
-
-Although this workflow is forked from one produced by the [Manning Lab](https://manning-lab.github.io/), this fork is maintained by UCSC.
-
-Contributing authors include:
-* Tim Majarian (tmajaria@broadinstitute.org)
-* Ash O'Farrell (aofarrel@ucsc.edu)
-
-It is based on the University of Washington pipeline which has its own edit and contribution history.
+This workflow converts files in Variant Call Format (VCF) to Genomic Data Structure format (GDS). It was an attempt to implement the first step of the [University of Washington TOPMed pipeline](https://github.com/UW-GAC/analysis_pipeline), itself a five-part process, but is now replaced by the repository linked above.
 
 ## Dependencies
 
