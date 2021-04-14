@@ -1,5 +1,5 @@
 {
   "vcfToGds_wf.vcf_files": ["test_inputs/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.MAC10.01p.vcf.gz"],
-  "vcfToGds_wf.this_disk": 50,
-  "vcfToGds_wf.this_memory": 10
+  "vcfToGds_wf.vcfgds_disk": 50,
+  "vcfToGds_wf.vcfgds_memory": 10
 }

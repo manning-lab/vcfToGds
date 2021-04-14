@@ -31,3 +31,11 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+# Mac files
+.DS_Store
+
+# Test output files
+cromwell-input/*
+Cromwell.stdout.txt
+Cromwell.stderr.txt
