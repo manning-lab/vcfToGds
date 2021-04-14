@@ -1,52 +1,43 @@
-version 1.0
-
 task runGds {
-	input {
-		File vcf
-		Int disk
-		Int memory
-		String output_file_name = basename(sub(vcf, "\\.vcf.gz$", ".gds"))
-	}
+	File vcf
+	Int disk
+	Float memory
 	
+
 	command {
-		set -eux -o pipefail
-
-		echo "Calling R script vcfToGds.R"
-
-		R --vanilla --args ~{vcf} < /vcfToGds/vcfToGds.R
+		R --vanilla --args ${vcf} < /vcfToGds/vcfToGds.R
 	}
 
 	runtime {
-		docker: "quay.io/aofarrel/vcf2gds:circleci-push"
+		docker: "manninglab/vcftogds:latest"
 		disks: "local-disk ${disk} SSD"
 		bootDiskSizeGb: 6
 		memory: "${memory} GB"
 	}
 
 	output {
-		File out = output_file_name
+		File out_file = select_first(glob("*.gds"))
 	}
 }
 
-
 workflow vcfToGds_wf {
-	input {
-		Array[File] vcf_files
-		Int vcfgds_disk
-		Int vcfgds_memory
-	}
+	Array[File] vcf_files
+	Int this_disk
+	Float this_memory
 
-	scatter(vcf_file in vcf_files) {
-		call runGds {
-			input:
-				vcf = vcf_file,
-				disk = vcfgds_disk,
-				memory = vcfgds_memory
+	scatter(this_file in vcf_files) {
+		call runGds { 
+			input: vcf = this_file, disk = this_disk, memory = this_memory
 		}
 	}
 
-	meta {
-		author: "Tim Majarian"
-		email: "tmajaria@broadinstitute.org"
+	output {
+		Array[File] gds_files = runGds.out_file
 	}
+
+	meta {
+        author: "Tim Majarian"
+        email: "tmajaria@broadinstitute.org"
+        description: "Convert a VCF file to a GDS file."
+    }
 }
