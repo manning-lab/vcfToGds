@@ -2,6 +2,7 @@ task runGds {
 	File vcf
 	Int disk
 	Float memory
+	Int preemptible
 	
 
 	command {
@@ -13,6 +14,7 @@ task runGds {
 		disks: "local-disk ${disk} SSD"
 		bootDiskSizeGb: 6
 		memory: "${memory} GB"
+		preemptible: "${preemptible}"
 	}
 
 	output {
@@ -24,10 +26,11 @@ workflow vcfToGds_wf {
 	Array[File] vcf_files
 	Int this_disk
 	Float this_memory
+	Int? preemptible = 0
 
 	scatter(this_file in vcf_files) {
 		call runGds { 
-			input: vcf = this_file, disk = this_disk, memory = this_memory
+			input: vcf = this_file, disk = this_disk, memory = this_memory, preemptible = preemptible
 		}
 	}
 
