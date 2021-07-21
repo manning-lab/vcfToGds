@@ -1,35 +1,13 @@
 # vcfToGds - Convert vcf files to gds format
 
+### Authors
+**[Tim Majarian](tmajaria@broadinstitute.org)**
+
 ## Description 
 
 This workflow converts files in Variant Call Format (VCF) to Genomic Data Structure format (GDS). 
 
-### Authors
-
-This workflow is produced and maintained by the [Manning Lab](https://manning-lab.github.io/). Contributing authors include:
-
-* (Tim Majarian)[tmajaria@broadinstitute.org]
-
-## Dependencies
-
-### Workflow execution
-
-* [WDL](https://software.broadinstitute.org/wdl/documentation/quickstart)
-* [Cromwell](http://cromwell.readthedocs.io/en/develop/)
-
-### R packages
-
-* [SeqArray](https://www.bioconductor.org/packages/release/bioc/html/SeqArray.html)
-
-## Workflow elements
-
-### vcfToGds.R
-This script is the main function for converting vcf to gds. It uses the SeqArray package in R.
-
-Inputs:
-* vcf : a file in vcf format
-* disk : amount of disk space to allot for each job
-* memory : amount of memory to allot for each job
-
-Outputs :
-* out_file : GDS file matching the name of the input vds with ".gds" appeneded to the end
+* vcf_files: "Array of files, with extensions: .vcf, .vcf.gz, or .vcf.bgz"
+* disk: "Runtime parameter; amount of disk space to provision in gigabytes. Default: 100GB."
+* memory: "Runtime parameter; amount of memory to provision in gigabytes. Default: 20GB."
+* preemptible: "Runtime parameter; whether to use preemptible machines. Default: 0 (no)."
