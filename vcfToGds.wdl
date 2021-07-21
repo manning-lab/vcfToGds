@@ -1,20 +1,22 @@
+version 1.0
 task runGds {
-	File vcf
-	Int disk
-	Float memory
-	Int preemptible
+	input {
+		File vcf
+		Int? disk
+		Float? memory
+		Int? preemptible
+	}
 	
-
 	command {
-		R --vanilla --args ${vcf} < /vcfToGds/vcfToGds.R
+		R --vanilla --args ~{vcf} < /vcfToGds/vcfToGds.R
 	}
 
 	runtime {
-		docker: "manninglab/vcftogds:latest"
-		disks: "local-disk ${disk} SSD"
+		docker: "quay.io/manninglab/vcftogds:0.1"
+		disks: "local-disk ~{disk} HDD"
 		bootDiskSizeGb: 6
-		memory: "${memory} GB"
-		preemptible: "${preemptible}"
+		memory: "~{memory} GB"
+		preemptible: "~{preemptible}"
 	}
 
 	output {
@@ -23,14 +25,16 @@ task runGds {
 }
 
 workflow vcfToGds_wf {
-	Array[File] vcf_files
-	Int this_disk
-	Float this_memory
-	Int? preemptible = 0
-
+	input {
+		Array[File] vcf_files
+		Int? disk = 100
+		Float? memory = 20
+		Int? preemptible = 0
+	}
+	
 	scatter(this_file in vcf_files) {
 		call runGds { 
-			input: vcf = this_file, disk = this_disk, memory = this_memory, preemptible = preemptible
+			input: vcf = this_file, disk = disk, memory = memory, preemptible = preemptible
 		}
 	}
 
@@ -41,6 +45,13 @@ workflow vcfToGds_wf {
 	meta {
         author: "Tim Majarian"
         email: "tmajaria@broadinstitute.org"
-        description: "Convert a VCF file to a GDS file."
+        description: "Convert a VCF file to a GDS file using the Seq Array package."
+    }
+
+    parameter_meta {
+    	vcf_files: "Array of files, with extensions: .vcf, .vcf.gz, or .vcf.bgz"
+    	disk: "Runtime parameter; amount of disk space to provision in gigabytes. Default: 100GB."
+    	memory: "Runtime parameter; amount of memory to provision in gigabytes. Default: 20GB."
+    	preemptible: "Runtime parameter; whether to use preemptible machines. Default: 0 (no)."
     }
 }

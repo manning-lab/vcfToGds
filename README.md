@@ -8,7 +8,7 @@ This workflow converts files in Variant Call Format (VCF) to Genomic Data Struct
 
 This workflow is produced and maintained by the [Manning Lab](https://manning-lab.github.io/). Contributing authors include:
 
-* Tim Majarian (tmajaria@broadinstitute.org)
+* (Tim Majarian)[tmajaria@broadinstitute.org]
 
 ## Dependencies
 

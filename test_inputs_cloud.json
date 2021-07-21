@@ -1,5 +1,6 @@
 {
   "vcfToGds_wf.vcf_files": ["gs://terra-featured-workspaces/GWAS/1kg-genotypes/vcf_maf001/ALL.chr1.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.bi_maf001.vcf.bgz"],
-  "vcfToGds_wf.this_disk": 50,
-  "vcfToGds_wf.this_memory": 10
+  "vcfToGds_wf.disk": 50,
+  "vcfToGds_wf.memory": 10,
+  "vcfToGds_wf.preemptible": 1
 }
