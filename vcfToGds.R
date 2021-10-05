@@ -6,8 +6,16 @@ library(SeqArray)
 
 args <- commandArgs(trailingOnly=T)
 vcf <- args[1]
+compression <- args[2]
+cores <- as.numeric(args[3])
+
+if (is.na(cores)) {
+	cores <- 1
+}
 
 # remove extension, can be .vcf, .vcf.gz, .vcf.bgz
 gds_out <- paste0(sub(".vcf.bgz$|.vcf.gz$|.vcf$", "", basename(vcf)), ".gds")
 
-seqVCF2GDS(vcf, gds_out, storage.option="LZMA_RA", verbose=TRUE)
+seqParallelSetup(cores)
+seqVCF2GDS(vcf, gds_out, storage.option=compression, parallel = T, verbose=TRUE)
+seqParallelSetup(F)

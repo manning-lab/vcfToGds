@@ -2,17 +2,19 @@ version 1.0
 task runGds {
 	input {
 		File vcf
+		String? compression
+		Int? cores
 		Int? disk
 		Float? memory
 		Int? preemptible
 	}
 	
 	command {
-		R --vanilla --args ~{vcf} < /vcfToGds/vcfToGds.R
+		R --vanilla --args ~{vcf} ~{default="LZMA_RA" compression} ~{default="1" cores} < /vcfToGds/vcfToGds.R
 	}
 
 	runtime {
-		docker: "quay.io/manninglab/vcftogds:latest"
+		docker: "quay.io/manninglab/vcftogds:par_lz"
 		disks: "local-disk ~{disk} HDD"
 		bootDiskSizeGb: 6
 		memory: "~{memory} GB"
