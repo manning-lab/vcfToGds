@@ -29,6 +29,8 @@ task runGds {
 workflow vcfToGds_wf {
 	input {
 		Array[File] vcf_files
+		String? compression = "LZMA_RA"
+		Int? cores = 1
 		Int? disk = 100
 		Float? memory = 20
 		Int? preemptible = 0
@@ -36,7 +38,7 @@ workflow vcfToGds_wf {
 	
 	scatter(this_file in vcf_files) {
 		call runGds { 
-			input: vcf = this_file, disk = disk, memory = memory, preemptible = preemptible
+			input: vcf = this_file, compression = compression, cores = cores, disk = disk, memory = memory, preemptible = preemptible
 		}
 	}
 
@@ -52,6 +54,8 @@ workflow vcfToGds_wf {
 
     parameter_meta {
     	vcf_files: "Array of files, with extensions: .vcf, .vcf.gz, or .vcf.bgz"
+    	compression: "Compression algorithm to use: ZIP_RA, LZMA_RA, LZ4_RA (fastest). Default: LZMA_RA."
+    	cores: "Number of cores to use in parallel processing. Default: 1."
     	disk: "Runtime parameter; amount of disk space to provision in gigabytes. Default: 100GB."
     	memory: "Runtime parameter; amount of memory to provision in gigabytes. Default: 20GB."
     	preemptible: "Runtime parameter; whether to use preemptible machines. Default: 0 (no)."
